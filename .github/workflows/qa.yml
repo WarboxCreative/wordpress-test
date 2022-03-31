@@ -1,0 +1,107 @@
+name: CI
+on: [ pull_request, push ]
+env:
+  # Use the same PHP modules across each step
+  php_modules: 'bcmath, ctype, curl, dom, gd, hash, iconv, intl, mbstring, openssl, pdo_mysql, simplexml, soap, xsl, zip'
+jobs:
+  # The purpose of this job is to ensure that the vendor directory is up to date and can be shared with the different testing
+  # jobs. By putting this into a standalone job, rather than doing this for every testing job, we cut the total time for this
+  # to run in half. If in the future there are further dependencies that are required (i.e. anything for frontend testing) these
+  # should be generated and checked here as well
+  build:
+    name: Build Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest Ref
+        uses: actions/checkout@v2
+
+      # After getting the latest commit, we are going to fetch the old vendor directory from the cache. If the composer.lock
+      # file has not changed, then there will be a cache hit, and nothing else needs to be done for this job. If it has changed
+      # then we will install PHP, get the composer cache from the cache and install the updates. At the end of the job the new
+      # vendor file will be cached to be used in the subsequent jobs. Ideally, the cache action would have a way of checking for
+      # a hit with out downloading the entire directory, but this can be updated if the action provides that option in the future
+      - name: Cache Vendor Directory
+        id: cacheVendor
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('./composer.lock') }}
+
+      - name: Setup PHP
+        if: steps.cacheVendor.outputs.cache-hit != 'true' # Cache was hit, skip this step and the others
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: ${{ env.php_modules }}
+          tools: composer:v2
+          coverage: none # disables xdebug, can use other options
+
+      - name: Get Composer Cache Directory
+        if: steps.cacheVendor.outputs.cache-hit != 'true'
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v2
+        if: steps.cacheVendor.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('./composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Install composer dependencies
+        if: steps.cacheVendor.outputs.cache-hit != 'true'
+        uses: ./.github/actions/composer-setup
+        with:
+          public_key: ${{ secrets.SSH_KEY_PUB }}
+          private_key: ${{ secrets.SSH_KEY }}
+
+  # The static test just require the files to be present, so the job for them is quite simple. There are a couple of things to be
+  # aware of here. First the matrix, we want to run each test even if one of the others fail so we get a complete overview of the
+  # state of the PR / push. By pulling the vendor directory from the cache, the setup for this takes ~30 seconds, so I'm happy to
+  # run each test individually. This means that the `fail-fast` param __must__ be set to false, otherwise one failure will prevent
+  # the rest from running. Secondly, the `test-types` should have descriptive names, to allow the actions screen to be easy to read.
+  # These variables are handles in the [test-runner](../.github/test-runner.bash) script, and new tests should be added to the
+  # statement following the current format
+  static-tests:
+    name: Static Tests
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test-type:
+          - "Code Sniffer"
+          - "Mess Detector"
+          - "Backend Copy Paste Detector"
+
+    steps:
+      - name: Checkout latest Ref
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          extensions: ${{ env.php_modules }}
+          tools: composer:v1
+          coverage: none # disables xdebug, can use other options
+
+      - name: Restore Vendor Directory
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('./composer.lock') }}
+
+      - name: Run Tests
+        run: .github/test-runner.bash "${{ matrix.test-type }}"
+
+  auto-assign:
+    name: Assignee and Reviewer
+    if: github.event_name == 'pull_request' && success()
+    needs: [ build, static-tests ]
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Assignement
+        uses: kentaro-m/auto-assign-action@v1.1.2
+        with:
+          configuration-path: ".github/actions/auto-assign/assign.yml"

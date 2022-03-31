@@ -1,0 +1,15 @@
+# set assignee can be true/false/author
+addAssignees: author
+# set reviewers? true/false
+addReviewers: true
+# A number of reviewers added to the pull request
+# Set 0 to add all the reviewers (default: 0)
+numberOfReviewers: 0
+# Reviewers list
+reviewers:
+  - owen-warbox
+# filter list
+filterLabels:
+  exclude:
+    - wip
+

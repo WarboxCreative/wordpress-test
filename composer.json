@@ -1,0 +1,28 @@
+{
+  "require": {
+    "php": "~8.0",
+    "ext-json": "*",
+    "composer/xdebug-handler": "^2.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+    "friendsofphp/php-cs-fixer": "3.4.0",
+    "php-cs-fixer/diff": "^2.0",
+    "phpstan/phpstan": "^1.4",
+    "phpunit/php-timer": "^5.0.3",
+    "sebastian/phpcpd": "^6.0.3",
+    "sebastian/version": "^3.0.2",
+    "szepeviktor/phpstan-wordpress": "^1.0"
+  },
+  "require-dev": {
+    "phpcompatibility/php-compatibility": "^9.3",
+    "phpmd/phpmd": "^2.11.0",
+    "phpstan/extension-installer": "^1.1",
+    "squizlabs/php_codesniffer": "^3.6"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}

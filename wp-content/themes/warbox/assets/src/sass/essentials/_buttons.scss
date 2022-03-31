@@ -1,0 +1,65 @@
+.btn {
+	@apply .inline-block .px-6 .py-2 .text-base .font-semibold .border-0 .no-underline .leading-none .bg-blue .text-center .text-white;
+}
+
+.btn__icon{
+	@apply .fill-current .w-auto .h-3 .mr-2;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+.btn:hover {
+	&__icon {
+		@apply .mr-5;
+	}
+}
+
+.btn--full{
+	@apply .w-full .justify-center;
+}
+
+.btn--disabled{
+	@apply .opacity-50 .cursor-not-allowed;
+}
+
+.btn--icon{
+	@apply .inline-flex .items-center;
+}
+
+.btn--rev{
+	direction: rtl;
+	.btn__icon{
+		@apply .mr-0 .ml-2;
+	}
+}
+
+.btn--rev:hover {
+	.btn__icon {
+		@apply .ml-5;
+	}
+}
+
+.btn--primary{
+	@apply .bg-blue .text-white
+}
+
+.btn--primary:hover {
+	@apply .bg-blue-light;
+	box-shadow: 3px 2px 3px 0 rgba(0,0,0, 0.3);
+}
+
+.btn--secondary{
+	@apply .bg-blue-light .text-white .font-semibold;
+}
+
+.btn--secondary:hover {
+	@apply .bg-blue-light;
+	box-shadow: 3px 2px 3px 0 rgba(0,0,0, 0.3);
+}
+
+.btn--text {
+	@apply .bg-transparent .text-blue .px-0 .py-0 .font-light;
+}

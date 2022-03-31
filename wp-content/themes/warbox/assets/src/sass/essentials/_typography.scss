@@ -1,0 +1,105 @@
+.heading {
+	@apply .font-medium .text-blue .mb-6;
+}
+
+.h1{
+	@apply .heading .text-5xl .leading-tight;
+}
+
+.h2{
+	@apply .heading .font-normal .text-4xl .leading-tight;
+}
+
+.h3{
+	@apply .heading .font-normal .text-3xl .leading-tight;
+}
+
+.h4{
+	@apply .font-medium .text-blue .text-2xl .leading-tight;
+}
+
+.h5{
+	@apply .font-medium .text-blue .text-xl .leading-tight;
+}
+
+.h6{
+	@apply .font-medium .text-blue .text-lg .leading-tight;
+}
+
+p{
+	@apply .font-light .text-blue .mb-4;
+}
+
+ul {
+	list-style: square;
+	padding-left: 1rem;
+}
+
+ol {
+	list-style: decimal;
+	padding-left: 1rem;
+}
+
+ul li,
+ol li {
+	@apply .text-blue .font-light;
+	position: relative;
+	margin-bottom: 0.5rem;
+}
+
+ol li::marker,
+ul li::marker {
+	@apply .text-blue;
+}
+
+ul.list-none {
+	list-style: none;
+}
+
+strong {
+	@apply .font-bold;
+}
+
+strong,
+span,
+blockquote {
+	@apply .font-light;
+}
+
+.small{
+	@apply .text-sm;
+}
+
+a {
+	@apply .text-blue .font-light .no-underline;
+}
+
+p a {
+	@apply .underline;
+}
+
+@screen lg{
+	.h1 {
+		@apply .text-6xl;
+	}
+
+	.h2 {
+		@apply .text-5xl;
+	}
+
+	.h3 {
+		@apply .text-4-5xl;
+	}
+
+	.h4{
+		@apply .text-2xl;
+	}
+
+	.h5{
+		@apply .text-xl
+	}
+
+	.h6{
+		@apply .text-lg
+	}
+}

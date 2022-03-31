@@ -33,7 +33,7 @@ jobs:
         with:
           php-version: 7.4
           extensions: ${{ env.php_modules }}
-          tools: composer:v2
+          tools: composer:v1
           coverage: none # disables xdebug, can use other options
 
       - name: Get Composer Cache Directory

@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="page-content">
 		<?php
 		if ( is_home() && current_user_can( 'publish_posts' ) ) {
-			$kses = array( 'a' => [ 'href' => [] ] );
+			$kses = array( 'a' => array( 'href' => array() ) );
 			printf(
 				/* translators: 1: Link to WP admin new post page. */
 				'<p>' . wp_kses( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'warbox' ), $kses ) . '</p>',

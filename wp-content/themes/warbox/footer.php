@@ -11,11 +11,8 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<div class="container-fluid bg-black c-footer" id="contact">
+<div class="w-full bg-black c-footer" id="contact">
 	<div class="container">
-		<div class="row">
-
-		</div>
 	</div>
 </div><!-- wrapper end -->
 </div><!-- #page we need this extra closing tag here -->

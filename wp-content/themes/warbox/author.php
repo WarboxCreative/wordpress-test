@@ -52,7 +52,7 @@ get_header();
 									printf(
 										/* translators: %s: author name */
 										esc_html__( 'About %s', 'warbox' ),
-										$curauth->display_name
+										wp_kses_post( $curauth->display_name )
 									);
 									?>
 								</dt>
@@ -66,7 +66,7 @@ get_header();
 						printf(
 							/* translators: %s: author name */
 							'<h2>' . esc_html__( 'Posts by %s', 'warbox' ) . '</h2>',
-							$curauth->display_name
+							wp_kses_post( $curauth->display_name )
 						);
 					}
 					?>

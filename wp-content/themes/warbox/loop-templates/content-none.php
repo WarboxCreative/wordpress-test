@@ -19,22 +19,22 @@ defined( 'ABSPATH' ) || exit;
 	<div class="page-content">
 		<?php
 		if ( is_home() && current_user_can( 'publish_posts' ) ) {
-			$kses = [ 'a' => [ 'href' => [] ] ];
+			$kses = array( 'a' => [ 'href' => [] ] );
 			printf(
 				/* translators: 1: Link to WP admin new post page. */
-				'<p>' . wp_kses( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'understrap' ), $kses ) . '</p>',
+				'<p>' . wp_kses( __( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'warbox' ), $kses ) . '</p>',
 				esc_url( admin_url( 'post-new.php' ) )
 			);
 		} elseif ( is_search() ) {
 			printf(
 				'<p>%s<p>',
-				esc_html__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'understrap' )
+				esc_html__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'warbox' )
 			);
 			get_search_form();
 		} else {
 			printf(
-					'<p>%s<p>',
-					esc_html__('It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'understrap')
+				'<p>%s<p>',
+				esc_html__( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'warbox' )
 			);
 			get_search_form();
 		}

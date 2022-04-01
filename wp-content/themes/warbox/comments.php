@@ -30,7 +30,7 @@ if ( post_password_required() ) {
 				printf(
 					/* translators: %s: post title */
 					esc_html_x( 'One thought on &ldquo;%s&rdquo;', 'comments title', 'warbox' ),
-					'<span>' . get_the_title() . '</span>'
+					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			} else {
 				printf(
@@ -45,7 +45,7 @@ if ( post_password_required() ) {
 						)
 					),
 					number_format_i18n( $comments_number ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					'<span>' . get_the_title() . '</span>'
+					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
 				);
 			}
 			?>

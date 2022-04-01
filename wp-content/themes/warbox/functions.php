@@ -17,21 +17,22 @@ function register_my_settings(): void {
 	$cgvs = WP_CONTENT_DIR . '/custom-global-variables/' . md5( AUTH_KEY ) . '.json';
 	if ( file_exists( $cgvs ) ) {
 		$settings = array();
-		$vars = file_get_contents($cgvs);
+		// phpcs:ignore
+		$vars     = file_get_contents( $cgvs );
 
-		if( ! empty( $vars ) ) {
+		if ( ! empty( $vars ) ) {
 			$settings = json_decode( $vars, true );
 		}
 		$args = array(
-			'type' => 'string',
+			'type'              => 'string',
 			'sanitize_callback' => 'sanitize_text_field',
-			'default' => null,
-			'show_in_graphql' => true,
+			'default'           => null,
+			'show_in_graphql'   => true,
 		);
 
 		foreach ( $settings as $key => $val ) {
-			$key             = esc_html($key);
-			$val             = htmlentities( wp_kses_post($val) );
+			$key             = esc_html( $key );
+			$val             = htmlentities( wp_kses_post( $val ) );
 			$args['default'] = $val;
 
 			register_setting( 'cgv', $key, $args );

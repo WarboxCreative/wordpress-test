@@ -4,3 +4,26 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+body {
+	@apply .text-black .bg-white overflow-x-hidden;
+}
+
+.container{
+	@apply .mx-auto .px-4 .overflow-x-hidden;
+	max-width: 1640px!important;
+}
+
+.error {
+	@apply .border .border-error
+}
+
+.error-message {
+	@apply .text-error .text-sm .italic;
+}
+
+@responsive {
+	.container {
+		@apply .max-w-6xl .mx-auto .px-4 .overflow-x-hidden;
+	}
+}

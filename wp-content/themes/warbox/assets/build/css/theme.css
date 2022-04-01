@@ -12020,6 +12020,49 @@ video {
           animation: bounce 1s infinite;
 }
 
+body {
+  --text-opacity: 1;
+  color: #000000;
+  color: rgba(0, 0, 0, var(--text-opacity));
+  --bg-opacity: 1;
+  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  overflow-x: hidden;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow-x: hidden;
+  max-width: 1640px !important;
+}
+
+.error {
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #eb5757;
+  border-color: rgba(235, 87, 87, var(--border-opacity));
+}
+
+.error-message {
+  --text-opacity: 1;
+  color: #eb5757;
+  color: rgba(235, 87, 87, var(--text-opacity));
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.container {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow-x: hidden;
+}
+
 @media (min-width: 568px) {
   .sm\:aspect-w-1,
 .sm\:aspect-w-2,
@@ -22887,6 +22930,15 @@ video {
   .sm\:animate-bounce {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .sm\:container {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
   }
 }
 
@@ -33758,6 +33810,15 @@ video {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .md\:container {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
+  }
 }
 
 @media (min-width: 769px) {
@@ -44627,6 +44688,15 @@ video {
   .desktop\:animate-bounce {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .desktop\:container {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
   }
 }
 
@@ -55498,6 +55568,15 @@ video {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
   }
+
+  .lg\:container {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -66367,6 +66446,15 @@ video {
   .xl\:animate-bounce {
     -webkit-animation: bounce 1s infinite;
             animation: bounce 1s infinite;
+  }
+
+  .xl\:container {
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    overflow-x: hidden;
   }
 }
 
